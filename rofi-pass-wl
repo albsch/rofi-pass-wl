@@ -12,6 +12,9 @@ password=$(printf '%s\n' "${password_files[@]}" | rofi -i -dmenu "$@")
 
 [[ -n $password ]] || exit
 
+# TODO understand why globbing patterns break pass show
+shopt -u nullglob globstar
+
 t=$(pass show "$password")
 tags=$(printf '%s' "$t" | tail -n +3 | sed 's/:.*//')
 filtered=$(printf "autotype\npassword\n%s\n" "$tags")

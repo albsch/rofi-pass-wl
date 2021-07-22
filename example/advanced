@@ -1,0 +1,5 @@
+123456password
+---
+user: helouser
+email: tester@helloworld.example
+autotype: user :tab email :tab pass :tab pass

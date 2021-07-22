@@ -18,20 +18,17 @@ filtered=$(printf "autotype\npassword\n%s\n" "$tags")
 action=$(printf '%s\n' "${filtered}" | rofi -dmenu "$@")
 
 if [[ $action == "password" ]]; then
-  pw=$(pass show "$password" | head -1)
-  wtype "$pw"
+  echo -n `pass show "$password" | head -1` | wtype -
 elif [[ $action == "autotype" ]]; then
   txt=$(pass show "$password" | sed -n "s/$action: //p")
   [[ -n $txt ]] || txt="user :tab pass" # default autotype
-  actionstring=""
   for word in $txt
   do
     if [[ $word == ":tab" ]]; then
       wtype -P TAB
     elif [[ $word == "pass" ]]; then
-      pw=$(pass show "$password" | head -1)
-      # remove newline at the end
-      echo -n "$pw" | wtype -
+      # echo removes newline from head
+      echo -n `pass show "$password" | head -1` | wtype -
     else
       # fetch value of key
       wtype $(pass show "$password" | grep $word: | sed 's/.*: //')

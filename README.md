@@ -1,3 +1,17 @@
-# passmenu-wayland
+# rofi-pass-wl
 
-Rofi-pass replacement with wayland support. No autotype support.
+Simple rofi-pass replacement for Wayland. Only supports wayland.
+
+# Features
+
+* Autotype
+  * `:tab` key support
+  * user defined fields
+  * default autotype `user :tab pass`
+
+
+# Runtime Requirements
+
+* `rofi`
+* `pass`
+* `wtype`
